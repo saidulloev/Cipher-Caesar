@@ -105,34 +105,12 @@ public class CipherCesar extends JFrame {
         this.add(scrollPane2);
         this.revalidate();
     }
-
-    public static void main(String[] args) {
-
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Windows Classic".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            // If Windows Classic is not available, you can set the GUI to another look and feel.
-        }
-
-        EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new CipherCesar().setVisible(true);
-            }
-        });
-    }
-
     void placeHolders() {
         placeHolderTxt(txtField);
     }
 
     void placeHolderTxt(JTextField txt) {
-        if (txt.getText().length() == 0) {
+        if (txt.getText().isEmpty()) {
             txt.setText("Сдвиг");
             txt.setForeground(new Color(150, 150, 150));
         }
@@ -149,7 +127,7 @@ public class CipherCesar extends JFrame {
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (txt.getText().length() == 0) {
+                if (txt.getText().isEmpty()) {
                     txt.setText("Сдвиг");
                     txt.setForeground(new Color(150, 150, 150));
                 }
@@ -162,7 +140,7 @@ public class CipherCesar extends JFrame {
         StringBuilder c = new StringBuilder();
         for (int i = 0; i < s.length(); i++) {
             buffer = s.charAt(i);
-            buffer += (temp % 12345);
+            buffer += (char) (temp % 12345);
             c.append(buffer);
         }
         return c.toString();
@@ -180,7 +158,7 @@ public class CipherCesar extends JFrame {
                 c.append('я');
             else {
                 buffer = s.charAt(i);
-                buffer -= (temp % 12345);
+                buffer -= (char) (temp % 12345);
                 c.append(buffer);
             }
         }
